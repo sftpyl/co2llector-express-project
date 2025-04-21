@@ -2,6 +2,8 @@ require('dotenv').config({ path: './.env' });
 const express = require('express');
 const mongoose = require('mongoose');
 const emisionRoutes = require('./routes/emisionRoutes')
+const swaggerUi = require('swagger-ui-express');
+const swaggerSpec = require('./docs/swagger'); 
 
 const app = express();
 
@@ -13,7 +15,8 @@ app.use(express.json());
 
 // Routes
 app.use('/api/emision', emisionRoutes);
-
+// Ruta para la documentación
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 mongoose.connect(process.env.MONGO_URI)
   .then(
