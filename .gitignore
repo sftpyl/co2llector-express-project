@@ -1,0 +1,80 @@
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build outputs
+dist/
+build/
+out/
+coverage/
+.temp/
+
+# Production
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Logs
+logs/
+*.log
+*.log.*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor folders
+.vscode/
+.idea/
+
+# React
+*.cache/
+*.gz
+*.map
+
+# Optional: if using eslint/prettier/etc.
+.eslintcache
+.prettiercache
+
+# Optional: if using testing tools
+jest-cache/
+jest-test-results.json
+
+# Optional: if using Parcel or similar
+.cache/
+
+# Optional: if using next.js
+.next/
+
+# Optional: if using vercel
+.vercel/
+
+# Optional: if using Firebase
+.firebase/
+
+# Optional: if using Storybook
+storybook-static/
+
+# Optional: if using Docker
+docker-compose.override.yml
+
+# Optional: Mac/Linux swap/lock files
+*.swp
+*.swo
+*~
+
+# Optional: Binaries
+*.exe
+*.out
+*.app
+*.so
+*.dll
+*.dylib
+
+# Visual Studio
+.vscode/
+*.code-workspace
