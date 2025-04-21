@@ -1,10 +1,7 @@
 const mongoose = require('mongoose');
-const { factoresEmisionFields } = require('./../services/factoresEmision')
+const { factoresEmisionSchemaFields } = require('./../services/factoresEmision')
 
 const Schema = mongoose.Schema;
-
-// Aplicar campos al schema
-const factoresEmisionSchema = new Schema(factoresEmisionFields);
 
 const emisionSchema = new Schema({
   empresaId: {
@@ -16,14 +13,22 @@ const emisionSchema = new Schema({
     type: Date,
     default: Date.now
   },
-  actividades: factoresEmisionSchema,
+  actividades: {
+    type: Map,
+    of: Number,
+    default: () => new Map()
+  },
   resultado: {     
     total: Number,
-    detalle: factoresEmisionSchema
+    detalle: {
+      type: Map,
+      of: Number,
+      default: () => new Map()
+    }
   },
   fuente: {
     type: String,
-    default: '',
+    default: '', // Modificar
   }
 }, { timestamps: true } )
 

@@ -1,16 +1,21 @@
 const factoresEmision = {
-  electricidad_wkh: 0.2,
-  gas_litros: 5,
-  transporte_auto_km: 0.1
+  electricidad_wkh: 0.4,
+  gas_litros: 2.3,
+  transporte_auto_km: 0.2,
+  viajes_avion_km: 0.09,
+  papel_kg: 1.3,
+  agua_m3: 0.5,
+  residuos_kg: 2.0
 }
 
-// Devuelve la estructura compatible con Mongoose
-const factoresEmisionFields = () => {
-  const fields = {};
-  for (let key in factoresEmision) {
-    fields[key] = { type: Number, default: 0, min: 0 };
+const filtrarActividadesValidas = (actividades) => {
+  const actividadesValidas = {};
+  for (const key in actividades) {
+    if (factoresEmision.hasOwnProperty(key)) {
+      actividadesValidas[key] = actividades[key];
+    }
   }
-  return fields;
+  return actividadesValidas;
 };
 
-module.exports = { factoresEmision, factoresEmisionFields };
+module.exports = { factoresEmision, filtrarActividadesValidas };

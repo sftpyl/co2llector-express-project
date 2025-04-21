@@ -1,15 +1,18 @@
-require('dotenv').config();
+require('dotenv').config({ path: './.env' });
 const express = require('express');
 const mongoose = require('mongoose');
-const userRoutes = require('./routes/userRoutes')
+const emisionRoutes = require('./routes/emisionRoutes')
 
 const app = express();
 
 // Middleware
 app.use(express.json());
+// Agregar el Middleware para acceso con autenticacion
+// Agregar al request información del usuario
+// req.empresa = empresa
 
 // Routes
-app.use('/api/user', userRoutes);
+app.use('/api/emision', emisionRoutes);
 
 
 mongoose.connect(process.env.MONGO_URI)
