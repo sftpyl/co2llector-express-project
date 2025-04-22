@@ -5,8 +5,7 @@ const secretKey = process.env.JWT_SECRET_KEY;
 
 const verifyAuthToken = (req, res, next) => {
   try {
-    const token =
-      req.cookies.authToken || req.headers["authorization"]?.split(" ")[1];
+    const token = req.cookies.authToken;
 
     if (!token) {
       console.log("verifyAuthToken: No token provided");
@@ -15,14 +14,14 @@ const verifyAuthToken = (req, res, next) => {
         .status(HTTP.STATUS.UNAUTHORIZED)
         .json({ message: HTTP.MESSAGE_TOKEN.TOKEN_NOT_PROVIDED });
     }
-     const decodedToken = jwt.decode(token, secretKey);
+    const decodedToken = jwt.decode(token, secretKey);
 
     if (!decodedToken) {
       console.log("verifyAuthToken: Token invalid or expired");
 
       return res
         .status(HTTP.STATUS.UNAUTHORIZED)
-        .json({ message: HTTP.MESSAGE_TOKEN.TOKEN_INVALID  });
+        .json({ message: HTTP.MESSAGE_TOKEN.TOKEN_INVALID });
     }
 
     req.user = {
@@ -30,10 +29,9 @@ const verifyAuthToken = (req, res, next) => {
       username: decodedToken.nombre,
       email: decodedToken.email,
       userType: decodedToken.userType,
-    }
+    };
 
     next();
-
   } catch (error) {
     console.error("Error verifying token:", error);
     return res
