@@ -25,8 +25,18 @@ const MESSAGE_REGISTER = {
   ERROR_COMPARING_PASSWORD: "Error al comparar la contraseña.",
 }
 
+const MESSAGE_TOKEN = {
+  TOKEN_GENERADED: "Token generado correctamente.",
+  TOKEN_NOT_GENERATED: "Error al generar el token.",
+  TOKEN_NOT_FOUND: "Token no encontrado.",
+  TOKEN_INVALID: "Token inválido o expirado.",
+  TOKEN_EXIRED: "Token expirado.",
+  TOKEN_NOT_PROVIDED: "Token no proporcionado.",
+}
+
 module.exports = {
   STATUS,
   MESSAGE_LOGIN,
   MESSAGE_REGISTER,
+  MESSAGE_TOKEN,
 };
