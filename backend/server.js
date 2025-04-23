@@ -22,11 +22,9 @@ app.use(express.json());
 // Routes
 const PATH_API = '/api';
 
-app.use('/api/emision', emisionRoutes);
 app.use(PATH_API, authRoutes);
 app.use(PATH_API, recommendationsRoutes);
-app.use('/api', authRoutes);
-app.use('/api', verifyAuthToken, emisionRoutes);
+app.use(PATH_API, verifyAuthToken, emisionRoutes);
 // Ruta para la documentación
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
