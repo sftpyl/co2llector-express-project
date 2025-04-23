@@ -157,14 +157,14 @@ const swaggerDefinition = {
       }
     },
     securitySchemes: {
-      bearerAuth: {
-        type: 'http',
-        scheme: 'bearer',
-        bearerFormat: 'JWT',
+      cookieAuth: {
+        type: 'apiKey',
+        in: 'cookie',
+        name: 'authToken', // el nombre exacto de la cookie donde guardás el JWT
       }
     }
   },
-  security: [{ bearerAuth: [] }]  // Nivel Global
+  security: [{ cookieAuth: [] }]  // Nivel Global
 };
 
 const options = {

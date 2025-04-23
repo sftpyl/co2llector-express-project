@@ -84,6 +84,31 @@
  *         description: Error en el inicio de sesión
  */
 
+/**
+ * @swagger
+ * /api/auth/logout:
+ *   post:
+ *     summary: Logout para usuario
+ *     tags: [User]
+ *     description: Logout para usuario
+ *     requestBody:
+ *       required: false
+ *     responses:
+ *       200:
+ *         description: Logout exitoso
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Logout exitoso
+ *       400:
+ *         description: Error de validación
+ *       500:
+ *         description: Error al cerrar sesión
+ */
 
 
 /**
@@ -94,7 +119,7 @@
  *     tags: [Emisiones]
  *     description: Crea una nueva emisión y devuelve los resultados.
  *     security:
- *       - bearerAuth: []
+ *       - cookieAuth: []
  *     requestBody:
  *       required: true
  *       content:

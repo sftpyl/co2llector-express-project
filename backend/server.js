@@ -18,10 +18,6 @@ app.use(cookieParser());
 // Middleware
 app.use(express.json());
 
-// Agregar el Middleware para acceso con autenticacion
-// Agregar al request información del usuario
-// req.empresa = empresa
-
 // Routes
 app.use('/api', authRoutes);
 app.use('/api', verifyAuthToken, emisionRoutes);

@@ -9,6 +9,11 @@ const STATUS = {
   INTERNAL_SERVER_ERROR: 500,
 };
 
+const MESSAGE_LOGOUT = {
+  LOGOUT_SUCCESSFUL: "Sesión cerrada exitosamente.",
+  ERROR_IN_LOGOUT: "Error al cerrar sesión.",
+};
+
 const MESSAGE_LOGIN = {
   USER_NOT_FOUND: "Usuario no encontrado.",
   INVALID_PASSWORD: "Contraseña inválida.",
@@ -37,6 +42,7 @@ const MESSAGE_TOKEN = {
 module.exports = {
   STATUS,
   MESSAGE_LOGIN,
+  MESSAGE_LOGOUT,
   MESSAGE_REGISTER,
   MESSAGE_TOKEN,
 };
