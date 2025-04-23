@@ -21,7 +21,7 @@ app.use(express.json());
 
 // Routes
 app.use('/api', authRoutes);
-app.use('/api/emision', emisionRoutes);
+app.use('/api', emisionRoutes);
 // Ruta para la documentación
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 

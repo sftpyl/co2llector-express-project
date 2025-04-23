@@ -1,4 +1,23 @@
-const { factoresEmision } = require('./factoresEmision')
+const { factoresEmision } = require('./../utils/dataset/factoresEmision')
+
+const filtrarActividadesValidas = (actividades) => {
+  if (typeof actividades !== 'object' || actividades === null) {
+    throw new Error('El parámetro "actividades" debe ser un objeto no nulo');
+  }
+
+  try {
+    const actividadesValidas = {};
+    for (const key in actividades) {
+      if (factoresEmision.hasOwnProperty(key)) {
+        actividadesValidas[key] = actividades[key];
+      }
+    }
+    return actividadesValidas;
+  } catch (err) {
+    console.error('Error al filtrar actividades:', err);
+    throw new Error(`Error al filtrar actividades: ${err.message}`);
+  }
+};
 
 const calcularEmision = (actividades) => {
   // actividades debe ser un objeto
@@ -13,8 +32,9 @@ const calcularEmision = (actividades) => {
     for (let key in actividades) {
       if (Object.hasOwn(factoresEmision, key)) {
         if (actividades[key] != null) { // checkea que no sea null ni undefined
-          detalle[key] = factoresEmision[key] * actividades[key];
-          total += detalle[key]
+          const aux = factoresEmision[key] * actividades[key];
+          detalle[key] = Math.round(aux * 100) / 100;
+          total += aux
         }
       }
     }
@@ -29,4 +49,4 @@ const calcularEmision = (actividades) => {
   }
 }
 
-module.exports = { calcularEmision }
+module.exports = { calcularEmision, filtrarActividadesValidas }

@@ -1,20 +1,21 @@
-const { calcularEmision } = require('./../services/calcularEmision')
-const { filtrarActividadesValidas } = require('./../services/factoresEmision')
+const { calcularEmision, filtrarActividadesValidas } = require('./../services/calcularEmision')
 const Emision = require('./../models/emisionModel')
+const HTTP = require("../utils/consts/httpConstants");
 
 const calcularEmisionController = async (req, res, next) => {
   try {
-    const empresaId = req.empresa._id;
+    // const empresaId = req.empresa._id;
+    const empresaId = 'req.empresa._id;'
     const { emisionData, save } = req.body;
 
     if (!emisionData) {
-      return res.status(400).json({ error: "Datos de emisión inválidos" });
+      return res.status(HTTP.STATUS.BAD_REQUEST).json({ message: "Datos de emisión inválidos" });
     }
 
     const actividades = emisionData?.actividades || {};
     const actividadesValidas = filtrarActividadesValidas(actividades)
     if (Object.keys(actividadesValidas).length === 0) {
-      return res.status(400).json({ error: "No se definieron actividades" });
+      return res.status(HTTP.STATUS.BAD_REQUEST).json({ message: "No se definieron actividades" });
     }
 
     emisionData.actividades = actividadesValidas
@@ -29,7 +30,7 @@ const calcularEmisionController = async (req, res, next) => {
       await emision.save()
       console.log('Emision Guardada');
     }
-    res.status(200).json(emision);
+    res.status(HTTP.STATUS.OK).json(emision);
   } catch (err) {
     next(err) // Pasa el error al middleware global
   }

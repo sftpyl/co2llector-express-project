@@ -15,23 +15,4 @@ const factoresEmision = {
 };
 
 
-const filtrarActividadesValidas = (actividades) => {
-  if (typeof actividades !== 'object' || actividades === null) {
-    throw new Error('El parámetro "actividades" debe ser un objeto no nulo');
-  }
-
-  try {
-    const actividadesValidas = {};
-    for (const key in actividades) {
-      if (factoresEmision.hasOwnProperty(key)) {
-        actividadesValidas[key] = actividades[key];
-      }
-    }
-    return actividadesValidas;
-  } catch (err) {
-    console.error('Error al filtrar actividades:', err);
-    throw new Error(`Error al filtrar actividades: ${err.message}`);
-  }
-};
-
-module.exports = { factoresEmision, filtrarActividadesValidas };
+module.exports = { factoresEmision };

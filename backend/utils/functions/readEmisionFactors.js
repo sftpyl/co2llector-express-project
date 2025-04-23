@@ -1,11 +1,11 @@
 const fs = require('fs');
 const csv = require('csv-parser');
 
-function leerFactoresEmision() {
+function readEmisionFactors() {
   return new Promise((resolve, reject) => {
     const factoresEmision = {};
 
-    fs.createReadStream('dataset.csv')
+    fs.createReadStream('./../dataset/dataset.csv')
       .pipe(csv())
       .on('data', (row) => {
         factoresEmision[row.subcategory] = row;
@@ -18,4 +18,4 @@ function leerFactoresEmision() {
   });
 }
 
-module.exports = { leerFactoresEmision };
+module.exports = { readEmisionFactors };

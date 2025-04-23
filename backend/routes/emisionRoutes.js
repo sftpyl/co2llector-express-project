@@ -2,6 +2,8 @@ const express = require('express');
 const { calcularEmisionController } = require('./../controllers/emisionController')
 const router = express.Router();
 
+const PATH_EMISSIONS = '/emissions';
+
 // Calcular Emision
 /**
  * @swagger
@@ -28,24 +30,24 @@ const router = express.Router();
  *       400:
  *         description: Error de validación
  */
-router.post('/calculate', calcularEmisionController)
+router.post(`${PATH_EMISSIONS}/calculate`, calcularEmisionController)
 
-/**
- * @swagger
- * /api/emision/test:
- *   get:
- *     summary: Testeo
- *     tags: [Emisiones]
- *     description: Testear el swagger
- *     security: []
- *     responses:
- *       200:
- *         description: Éxito
- *       400:
- *         description: Error de validación
- */
-router.get('/test', (req, res) => {
-  res.status(200).json({msg: 'Test'})
-})
+// /**
+//  * @swagger
+//  * /api/emision/test:
+//  *   get:
+//  *     summary: Testeo
+//  *     tags: [Emisiones]
+//  *     description: Testear el swagger
+//  *     security: []
+//  *     responses:
+//  *       200:
+//  *         description: Éxito
+//  *       400:
+//  *         description: Error de validación
+//  */
+// router.get('/test', (req, res) => {
+//   res.status(200).json({msg: 'Test'})
+// })
 
 module.exports = router
