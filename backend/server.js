@@ -5,6 +5,7 @@ const ConnectionMongoDB = require('./connections/mongoose');
 const { MESSAGE_CORRECT_CONECTION } = require('./utils/consts/connections');
 const cors = require('cors');
 const authRoutes = require('./routes/authRoute');
+const recommendationsRoutes = require('./routes/recommendationsRouter');
 
 const app = express();
 
@@ -17,8 +18,11 @@ app.use(express.json());
 // req.empresa = empresa
 
 // Routes
+const PATH_API = '/api';
+
 app.use('/api/emision', emisionRoutes);
-app.use('/api', authRoutes);
+app.use(PATH_API, authRoutes);
+app.use(PATH_API, recommendationsRoutes);
 
 
 app.listen(process.env.PORT, () => {
