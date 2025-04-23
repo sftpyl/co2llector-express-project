@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const { MESSAGE_CORRECT_CONECTION } = require('./utils/consts/connections');
 const emisionRoutes = require('./routes/emisionRoutes');
 const authRoutes = require('./routes/authRoute');
+const recommendationsRoutes = require('./routes/recommendationsRouter');
 const ConnectionMongoDB = require('./connections/mongoose');
 const errorHandler = require('./middlewares/errorMiddleware');
 const verifyAuthToken = require('./middlewares/verifyAuthToken');
@@ -19,6 +20,11 @@ app.use(cookieParser());
 app.use(express.json());
 
 // Routes
+const PATH_API = '/api';
+
+app.use('/api/emision', emisionRoutes);
+app.use(PATH_API, authRoutes);
+app.use(PATH_API, recommendationsRoutes);
 app.use('/api', authRoutes);
 app.use('/api', verifyAuthToken, emisionRoutes);
 // Ruta para la documentación
