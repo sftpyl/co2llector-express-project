@@ -90,4 +90,21 @@ const signIn = async (req, res) => {
   }
 };
 
-module.exports = { signUp, signIn };
+const logout = (req, res) => {
+  try {
+    res.clearCookie("authToken", {
+      httpOnly: true,
+      secure: process.env.TOKEN_SECURE === "production",
+      sameSite: "None",
+    });
+
+    res.status(HTTP.STATUS.OK).json({
+      message: HTTP.MESSAGE_LOGOUT.LOGOUT_SUCCESSFUL,
+    });
+  } catch (error) {
+    console.error(HTTP.MESSAGE_LOGOUT.ERROR_IN_LOGOUT, error);
+    res.status(500).json({ message: HTTP.MESSAGE_LOGOUT.ERROR_IN_LOGOUT });
+  }
+};
+
+module.exports = { signUp, signIn, logout };

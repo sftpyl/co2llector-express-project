@@ -19,18 +19,12 @@ app.use(cookieParser());
 // Middleware
 app.use(express.json());
 
-// Agregar el Middleware para acceso con autenticacion
-// Agregar al request información del usuario
-// req.empresa = empresa
-
 // Routes
 const PATH_API = '/api';
 
-app.use('/api/emision', emisionRoutes);
 app.use(PATH_API, authRoutes);
 app.use(PATH_API, recommendationsRoutes);
-app.use('/api', authRoutes);
-app.use('/api', verifyAuthToken, emisionRoutes);
+app.use(PATH_API, verifyAuthToken, emisionRoutes);
 // Ruta para la documentación
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
