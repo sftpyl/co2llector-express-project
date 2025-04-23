@@ -26,7 +26,7 @@ const verifyAuthToken = (req, res, next) => {
 
     req.user = {
       id: decodedToken.id,
-      username: decodedToken.nombre,
+      nombre: decodedToken.nombre,
       email: decodedToken.email,
       userType: decodedToken.userType,
     };

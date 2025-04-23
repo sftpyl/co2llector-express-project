@@ -1,0 +1,97 @@
+category,subcategory,unit,emission_factor_kg_co2e,source,notes
+agriculture,cocoa_kg,kg,10,ICCO,Cacao (fermentado)
+agriculture,coffee_kg,kg,15,FAO,Café (tostado)
+agriculture,corn_kg,kg,0.3,IPCC,Maíz (grano)
+agriculture,palm_oil_kg,kg,3.3,RSPO,Aceite de palma (crudo)
+agriculture,soybean_kg,kg,0.6,IPCC,Soja (cultivo)
+agriculture,wheat_kg,kg,0.4,IPCC,Trigo
+agtech,drip_irrigation,m3,0.05,FAO,Riego por goteo (agua + energía)
+agtech,vertical_farming_kWh,kWh,1.2,Agrilyst,Granja vertical (LEDs + clima)
+energy,biogas,m3,0.18,IPCC,Biogas para calefacción
+energy,biomass,kg,0.12,IPCC,Biomasa sostenible
+energy,cloud_computing_kWh,kWh,0.4,Stanford,Servidores cloud (AWS/GCP/Azure)
+energy,coal,kg,2.42,IPCC,Carbón térmico
+energy,datacenter_kWh,kWh,0.45,IEA,Data center promedio (mix global)
+energy,diesel,liter,2.68,UK BEIS,Diésel industrial
+energy,electricity_global,kWh,0.475,IEA,Mix energético mundial promedio
+energy,electricity_global,kWh,0.475,IEA,Mix energético mundial
+energy,electricity_renewable,kWh,0.05,IEA,Energía solar/eólica
+energy,gasoline,liter,2.31,UK BEIS,Gasolina estándar
+energy,lpg,kg,3.02,IPCC,Gas licuado de petróleo
+energy,natural_gas,m3,2.04,IPCC,Gas natural (combustión)
+energy,renewable_energy_kWh,kWh,0.05,IPCC,Solar/eólica certificada
+industry,aluminum,kg,8.1,IAI,Aluminio primario
+industry,cement,kg,0.83,GCCA,Cemento Portland
+industry,glass,kg,0.75,IPCC,Vidrio float
+industry,paper,kg,0.9,IPCC,Papel no reciclado
+industry,plastic_pe,kg,1.9,Plastics Europe,Polietileno
+industry,steel_primary,kg,1.85,World Steel,Acero primario
+industry,steel_recycled,kg,0.45,World Steel,Acero reciclado
+industry_agro,cattle_beef,kg,27,FAO,Carne de res (cría intensiva)
+industry_agro,cattle_dairy,kg,1.3,FAO,Leche de vaca
+industry_agro,fertilizer_nitrogen,kg,2.1,IPCC,Fertilizante nitrogenado
+industry_agro,greenhouse_heating,kWh,0.3,IPCC,Calefacción invernadero (gas)
+industry_agro,palm_oil,kg,3.3,RSPO,Aceite de palma (base)
+industry_agro,poultry,kg,4.5,FAO,Pollo (producción)
+industry_agro,rice,kg,2.7,IPCC,Arroz blanco
+industry_agro,soybean,kg,0.6,IPCC,Soja (para alimento)
+industry_chemicals,ammonia,kg,1.8,IFA,Amoniaco (producción)
+industry_chemicals,ethylene,kg,1.5,Plastics Europe,Etileno (petroquímico)
+industry_textil,cotton_conventional,kg,5.5,Textile Exchange,Algodón no orgánico
+industry_textil,cotton_organic,kg,2.2,Textile Exchange,Algodón orgánico
+industry_textil,dyeing_process,kg_fabric,0.6,ZDHC,Tintura estándar
+industry_textil,garment_washing,kg_fabric,0.3,WRAP,Lavado industrial
+industry_textil,polyester,kg,9.2,Textile Exchange,Poliester virgen
+industry_textil,wool,kg,25,CSIRO,Lana (incluye metano ovino)
+it,blockchain_transaction,transaction,300,Digiconomist,Bitcoin (promedio)
+it,email_spam,email,0.003,Mike Berners-Lee,Correo no deseado
+it,email_standard,email,0.004,Mike Berners-Lee,Email estándar
+it,streaming_hd_hour,hour,0.08,IEA,Streaming HD (servidores + red)
+livestock,beef_kg,kg,27,FAO,Carne de res (intensivo)
+livestock,eggs_dozen,dozen,2.1,IPCC,Huevos (gallinas)
+livestock,manure_kg,kg,0.1,IPCC,Estiércol (gestión)
+livestock,milk_liter,liter,1.3,FAO,Leche de vaca
+livestock,pork_kg,kg,6.3,FAO,Cerdo (producción)
+livestock,poultry_kg,kg,4.5,FAO,Pollo (engorde)
+media,digital_ad_impression,impression,0.0001,Carbon Trust,Anuncio digital (banner)
+media,movie_production,hour,1000,PEA,Película (por hora de filmación)
+media,newsprint_ton,ton,900,IPCC,Papel periódico
+media,tv_production_hour,hour,5000,BBC,Producción TV (estudio)
+mining,coal_ton,ton,2500,ICMM,Carbón térmico (extracción)
+mining,copper_ton,ton,4000,ICMM,Cobre refinado
+mining,gold_kg,kg,16000,World Gold Council,Oro (mina + refinación)
+mining,iron_ore_ton,ton,120,ICMM,Mineral de hierro
+mining,lithium_ton,ton,15000,USGS,Litio (salmuera)
+office,datacenter,kWh,0.5,IEA,Servidores promedio
+office,heating_natural_gas,kWh,0.205,IPCC,Calefacción a gas
+office,paper,kg,1.3,IPCC,Papel A4 blanco
+office,videoconference_hour,hour,0.05,IEA,Videollamada (HD)
+office,water,m3,0.344,Water Footprint Network,Agua potable
+tech,iot_device,unit,15,GSMA,Dispositivo IoT (fabricación)
+tech,laptop_unit,unit,350,Dell,Notebook (ciclo de vida completo)
+tech,semiconductor_wafer,cm2,0.012,SEMI,Fabricación de chips (300mm wafer)
+tech,server_rack,unit,5000,HP,Servidor enterprise (5 años uso)
+tech,smartphone_unit,unit,85,Apple,iPhone 13 (producción + transporte)
+transport,air_cargo_long,km/ton,0.65,ICAO,"Carga aérea (>1,500 km)"
+transport,air_cargo_short,km/ton,0.85,ICAO,"Carga aérea (<1,500 km)"
+transport,bus_urban,km/passenger,0.089,UK BEIS,Autobús urbano
+transport,car,km,0.089,UK BEIS,Auto
+transport,freight_air,km/ton,0.75,ICAO,Carga aérea promedio
+transport,livestock_truck,km/ton,0.15,EPA,Transporte de ganado
+transport,passenger_car_diesel,km,0.171,UK BEIS,Auto diésel (eficiencia estándar)
+transport,passenger_car_gasoline,km,0.192,UK BEIS,Auto promedio (motor de combustión)
+transport,passenger_car_hybrid,km,0.105,EEA,Híbrido gasolina-eléctrico
+transport,passenger_flight_long,km/passenger,0.139,DEFRA,Vuelo largo (economy)
+transport,passenger_flight_short,km/passenger,0.185,DEFRA,Vuelo corto (economy)
+transport,ship_container,km/ton,0.008,IMO,Transporte marítimo
+transport,train_electric,km/passenger,0.041,EEA,Tren eléctrico
+transport,truck_freight,km/ton,0.12,EPA,Camión de carga diésel
+transport,van_delivery,km,0.25,UK BEIS,Furgoneta reparto (diésel)
+waste,e_waste_landfill,kg,0.5,EPA,Electrónicos en vertedero
+waste,metal_recycled,kg,0.3,EPA,Metal reciclado
+waste,mixed_landfill,kg,1.8,IPCC,Residuos mixtos en vertedero
+waste,organic_composted,kg,0.1,IPCC,Compostaje de orgánicos
+waste,plastic_incinerated,kg,2.8,EPA,Plástico incinerado
+waste,plastic_recycled,kg,0.45,UK BEIS,Plástico reciclado
+waste_agro,manure_managed,kg,0.05,IPCC,Estiércol tratado
+waste_textil,fabric_landfill,kg,3.5,EPA,Textiles en vertedero

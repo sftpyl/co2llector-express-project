@@ -3,9 +3,9 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const prediccionSchema = new Schema({
-  empresaId: {
+  userId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Empresa',
+    ref: 'User',
     required: true
   },
   fechaPrediccion: {

@@ -1,12 +1,10 @@
 const mongoose = require('mongoose');
-const { factoresEmisionSchemaFields } = require('./../services/factoresEmision')
-
 const Schema = mongoose.Schema;
 
 const emisionSchema = new Schema({
-  empresaId: {
+  userId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Company',
+    ref: 'User',
     required: true
   },
   fecha: {
@@ -26,9 +24,17 @@ const emisionSchema = new Schema({
       default: () => new Map()
     }
   },
-  fuente: {
-    type: String,
-    default: '', // Modificar
+  mes: {
+    type: Number,
+    min: 1,
+    max: 12,
+    // required: true // validar en el controlador o middleware
+  },
+  anio: {
+    type: Number,
+    min: 1900,
+    max: 2100, 
+    // required: true // validar en el controlador o middleware
   }
 }, { timestamps: true } )
 

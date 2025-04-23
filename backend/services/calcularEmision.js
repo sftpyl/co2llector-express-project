@@ -1,19 +1,52 @@
-const { factoresEmision } = require('./factoresEmision')
+const { factoresEmision } = require('./../utils/dataset/factoresEmision')
+
+const filtrarActividadesValidas = (actividades) => {
+  if (typeof actividades !== 'object' || actividades === null) {
+    throw new Error('El parámetro "actividades" debe ser un objeto no nulo');
+  }
+
+  try {
+    const actividadesValidas = {};
+    for (const key in actividades) {
+      if (factoresEmision.hasOwnProperty(key)) {
+        actividadesValidas[key] = actividades[key];
+      }
+    }
+    return actividadesValidas;
+  } catch (err) {
+    console.error('Error al filtrar actividades:', err);
+    throw new Error(`Error al filtrar actividades: ${err.message}`);
+  }
+};
 
 const calcularEmision = (actividades) => {
   // actividades debe ser un objeto
-  let total = 0
-  let detalle = {}
-  for (let key in actividades) {
-    if (Object.hasOwn(factoresEmision, key)) {
-      if (actividades[key]) { // checkear condicion, podria ser mejor (actividades[key] != null), solo chequea null o undefined
-        detalle[key] = factoresEmision[key] * actividades[key];
-        total += detalle[key]
+  if (typeof actividades !== 'object' || actividades === null) {
+    throw new Error('Las actividades deben ser un objeto no nulo');
+  }
+
+  try {
+    let total = 0
+    let detalle = {}
+
+    for (let key in actividades) {
+      if (Object.hasOwn(factoresEmision, key)) {
+        if (actividades[key] != null) { // checkea que no sea null ni undefined
+          const aux = factoresEmision[key] * actividades[key];
+          detalle[key] = Math.round(aux * 100) / 100;
+          total += aux
+        }
       }
     }
+
+    total = Math.round(total * 100) / 100;
+
+    return { total, detalle }
+
+  } catch (err) {
+    console.error('Error calculando las emisiones:', err);
+    throw new Error(`Error al calcular las emisiones: ${err.message}`);
   }
-  total = Math.round(total * 100) / 100;
-  return { total, detalle }
 }
 
-module.exports = { calcularEmision }
+module.exports = { calcularEmision, filtrarActividadesValidas }

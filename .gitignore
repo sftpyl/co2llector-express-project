@@ -78,3 +78,6 @@ docker-compose.override.yml
 # Visual Studio
 .vscode/
 *.code-workspace
+
+# Datasets
+factoresDeEmision.csv
