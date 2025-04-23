@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const emisionRoutes = require('./routes/emisionRoutes')
 const swaggerUi = require('swagger-ui-express');
 const swaggerSpec = require('./docs/swagger'); 
+const errorHandler = require('./middlewares/errorMiddleware')
 
 const app = express();
 
@@ -17,6 +18,9 @@ app.use(express.json());
 app.use('/api/emision', emisionRoutes);
 // Ruta para la documentación
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
+// Agregar el middleware de manejo de errores después de las rutas
+app.use(errorHandler);
 
 mongoose.connect(process.env.MONGO_URI)
   .then(

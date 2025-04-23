@@ -12,40 +12,81 @@ const swaggerDefinition = {
   servers: [
     {
       url: `http://localhost:${process.env.PORT}`, // Cambiá esto si usás otro puerto o deploy
+      description: 'Development server',
     },
   ],
   components: {
     schemas: {
       CalcularEmision: {
         type: 'object',
-        required: ['actividades'],
-        properties: {
-          actividades: {
+        required: ['emisionData'],
+        properties: 
+        {
+          emisionData: {
             type: 'object',
-            example: {
-              electricidad_wkh: 0.4,
-              gas_litros: 2.3,
-              transporte_auto_km: 0.2,
-              viajes_avion_km: 0.09,
-              papel_kg: 1.3,
-              agua_m3: 0.5,
-              residuos_kg: 2.0
+            required: ['actividades'],
+            properties: {
+              actividades: {
+                type: 'object',
+                example: {
+                  electricidad_wkh: 0.4,
+                  gas_litros: 2.3,
+                  transporte_auto_km: 0.2,
+                  viajes_avion_km: 0.09,
+                  papel_kg: 1.3,
+                  agua_m3: 0.5,
+                  residuos_kg: 2.0
+                }
+              },
+              fecha: { 
+                type: 'string', 
+                format: 'date-time' 
+              }
             }
           },
-          fecha: { type: 'string', format: 'date-time' }
+          save: { 
+            type: 'boolean', 
+            default: false 
+          },
         }
       },
       EmisionResponse: {
         type: 'object',
         properties: {
           _id: { type: 'string' },
-          empresaId: { type: 'string' },
-          actividades: { type: 'object' },
+          empresaId: { 
+            type: 'string' 
+          },
+          actividades: { 
+            type: 'object',
+            example: {
+              electricidad_wkh: 1,
+              gas_litros: 2,
+              transporte_auto_km: 3,
+              viajes_avion_km: 4,
+              papel_kg: 5,
+              agua_m3: 6,
+              residuos_kg: 12
+            }
+          },
           resultado: {
             type: 'object',
             properties: {
-              total: { type: 'number' },
-              detalle: { type: 'object' }
+              total: { 
+                type: 'number' 
+              },
+              detalle: { 
+                type: 'object',
+                example: {
+                  electricidad_wkh: 0.4,
+                  gas_litros: 2.3,
+                  transporte_auto_km: 0.2,
+                  viajes_avion_km: 0.09,
+                  papel_kg: 1.3,
+                  agua_m3: 0.5,
+                  residuos_kg: 2.0
+                } 
+              }
             }
           },
           fuente: { type: 'string' },
@@ -63,7 +104,7 @@ const swaggerDefinition = {
       }
     }
   },
-  security: [{ bearerAuth: [] }]
+  security: [{ bearerAuth: [] }]  // Nivel Global
 };
 
 // swaggerDefinition.paths = {

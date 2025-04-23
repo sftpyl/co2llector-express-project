@@ -8,6 +8,7 @@ const recomendacionSchema = new Schema({
     ref: 'Emision',
     required: true
   },
+  prompt: String,
   recomendacion: String,
   modelo: String, // IA utilizada
 }, { timestamps: true } )

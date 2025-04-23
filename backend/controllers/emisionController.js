@@ -2,7 +2,7 @@ const { calcularEmision } = require('./../services/calcularEmision')
 const { filtrarActividadesValidas } = require('./../services/factoresEmision')
 const Emision = require('./../models/emisionModel')
 
-const calcularEmisionController = async (req, res) => {
+const calcularEmisionController = async (req, res, next) => {
   try {
     const empresaId = req.empresa._id;
     const { emisionData, save } = req.body;
@@ -30,8 +30,8 @@ const calcularEmisionController = async (req, res) => {
       console.log('Emision Guardada');
     }
     res.status(200).json(emision);
-  } catch (error) {
-    res.status(400).json({error: error.message})
+  } catch (err) {
+    next(err) // Pasa el error al middleware global
   }
 }
 

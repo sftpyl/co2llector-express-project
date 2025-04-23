@@ -37,6 +37,7 @@ router.post('/calculate', calcularEmisionController)
  *     summary: Testeo
  *     tags: [Emisiones]
  *     description: Testear el swagger
+ *     security: []
  *     responses:
  *       200:
  *         description: Éxito
