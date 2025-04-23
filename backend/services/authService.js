@@ -22,7 +22,7 @@ const createUser = async (userData) => {
 const checkUserExists = async (data) => {
   try {
     const userExistsEmail = await userModel.findOne({ email: data.email });
-    const userExistsName = await userModel.findOne({ nombre: data.name });
+    const userExistsName = await userModel.findOne({ nombre: data.nombre });
     if (userExistsEmail || userExistsName) {
       // console.log("User already exists:", userExistsEmail || userExistsName);
       return true;

@@ -4,8 +4,8 @@ const HTTP = require("../utils/consts/httpConstants");
 
 const calcularEmisionController = async (req, res, next) => {
   try {
-    // const empresaId = req.empresa._id;
-    const empresaId = 'req.empresa._id;'
+    const user = req.user;
+
     const { emisionData, save } = req.body;
 
     if (!emisionData) {
@@ -21,12 +21,22 @@ const calcularEmisionController = async (req, res, next) => {
     emisionData.actividades = actividadesValidas
     const resultado = calcularEmision(actividadesValidas);
     emisionData.fuente = 'Fuente'; // Moficar o sacar
-    const emision = new Emision( { empresaId, ...emisionData, resultado: {
+    /* 
+      Si no está loggeado userId = undefined.
+      No importa porque para guardar el documento debe estar loggeado
+    */
+    const emision = new Emision( { userId: user?.id, ...emisionData, resultado: {
       total: resultado.total,
       detalle: resultado.detalle 
     } } );
     
     if (save === true) {
+      console.log(user);
+      
+      // Usuario debe estar loggeado y ser empresa
+      if (!user?.id || user?.userType !== 'company') {
+        return res.status(HTTP.STATUS.UNAUTHORIZED).json({ message: "Usuario debe estar registrado y ser una empresa para guardar calculo de emisión" });
+      }
       await emision.save()
       console.log('Emision Guardada');
     }

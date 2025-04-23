@@ -1,17 +1,20 @@
 require('dotenv').config({ path: './.env' });
 const express = require('express');
 const cors = require('cors');
+const cookieParser = require('cookie-parser');
 const { MESSAGE_CORRECT_CONECTION } = require('./utils/consts/connections');
 const emisionRoutes = require('./routes/emisionRoutes');
 const authRoutes = require('./routes/authRoute');
 const ConnectionMongoDB = require('./connections/mongoose');
 const errorHandler = require('./middlewares/errorMiddleware');
+const verifyAuthToken = require('./middlewares/verifyAuthToken');
 const swaggerSpec = require('./docs/swagger'); 
 const swaggerUi = require('swagger-ui-express');
 
 const app = express();
-
 app.use(cors());
+app.use(cookieParser());
+
 // Middleware
 app.use(express.json());
 
@@ -21,7 +24,7 @@ app.use(express.json());
 
 // Routes
 app.use('/api', authRoutes);
-app.use('/api', emisionRoutes);
+app.use('/api', verifyAuthToken, emisionRoutes);
 // Ruta para la documentación
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 

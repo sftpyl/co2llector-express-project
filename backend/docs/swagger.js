@@ -17,6 +17,66 @@ const swaggerDefinition = {
   ],
   components: {
     schemas: {
+      RegisterUser: {
+        type: 'object',
+        required: [
+          'userType',
+          'email',
+          'password',
+          'nombre',
+          'pais',
+          'rubro'
+        ],
+        properties: {
+          userType: {
+            type: 'string',
+            enum: ['company', 'personal'],
+            example: 'company'
+          },
+          email: {
+            type: 'string',
+            format: 'email',
+            example: 'ricardo@gmail.com'
+          },
+          password: {
+            type: 'string',
+            format: 'password',
+            example: '1234'
+          },
+          nombre: {
+            type: 'string',
+            example: 'Ricardo'
+          },
+          pais: {
+            type: 'string',
+            example: 'Argentina'
+          },
+          rubro: {
+            type: 'string',
+            example: 'Textil',
+            description: 'Rubro de la empresa (solo aplica si userType es "company")'
+          }
+        }
+      },
+      LoginUser: {
+        type: 'object',
+        required: [
+          'email',
+          'password',
+        ],
+        properties: {
+          email: {
+            type: 'string',
+            format: 'email',
+            example: 'ricardo@gmail.com'
+          },
+          password: {
+            type: 'string',
+            format: 'password',
+            example: '1234'
+          }
+        }
+      },
       CalcularEmision: {
         type: 'object',
         required: ['emisionData'],
@@ -107,64 +167,9 @@ const swaggerDefinition = {
   security: [{ bearerAuth: [] }]  // Nivel Global
 };
 
-// swaggerDefinition.paths = {
-//   '/api/emision/calculate': {
-//     post: {
-//       summary: 'Crear una nueva emisión',
-//       tags: ['Emisiones'],
-//       description: 'Crea una nueva emisión y devuelve los resultados.',
-//       security: [
-//         {
-//           bearerAuth: []
-//         }
-//       ],
-//       requestBody: {
-//         required: true,
-//         content: {
-//           'application/json': {
-//             schema: {
-//               $ref: '#/components/schemas/CalcularEmision'
-//             }
-//           }
-//         }
-//       },
-//       responses: {
-//         200: {
-//           description: 'Éxito',
-//           content: {
-//             'application/json': {
-//               schema: {
-//                 $ref: '#/components/schemas/EmisionResponse'
-//               }
-//             }
-//           }
-//         },
-//         400: {
-//           description: 'Error de validación'
-//         }
-//       }
-//     }
-//   },
-//   '/api/emision/test': {
-//     get: {
-//       summary: 'Testeo',
-//       tags: ['Emisiones'],
-//       description: 'Testear el swagger',
-//       responses: {
-//         200: {
-//           description: 'Éxito'
-//         },
-//         400: {
-//           description: 'Error de validación'
-//         }
-//       }
-//     }
-//   }
-// }
-
 const options = {
   swaggerDefinition,
-  apis: [path.join(__dirname, '../routes/*.js')], 
+  apis: ["./routes/*.js", "./docs/*.js"],
 };
 
 const swaggerSpec = swaggerJSDoc(options);

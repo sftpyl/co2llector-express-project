@@ -27,7 +27,7 @@ const signUp = async (req, res) => {
       message: HTTP.MESSAGE_REGISTER.USER_CREATED_SUCCESSFULLY,
       user: {
         id: newUser._id,
-        name: newUser.name,
+        nombre: newUser.nombre,
         email: newUser.email,
       },
     });
@@ -63,9 +63,9 @@ const signIn = async (req, res) => {
     // Generar token JWT
     const token = generateToken({
       id: userfound._id,
+      nombre: userfound.nombre,
+      email: userfound.email,
       userType: userfound.userType,
-      rubro: userfound.rubro,
-      pais: userfound.pais,
     });
 
     console.log("Token generated:", token);
@@ -80,7 +80,7 @@ const signIn = async (req, res) => {
       message: HTTP.MESSAGE_LOGIN.LOGIN_SUCCESSFUL,
       user: {
         id: userfound._id,
-        name: userfound.name,
+        nombre: userfound.nombre,
         email: userfound.email,
       },
     });
