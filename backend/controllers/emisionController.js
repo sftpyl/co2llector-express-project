@@ -65,4 +65,20 @@ const allEmissions = async (req, res) => {
   }
 }
 
-module.exports = { calcularEmisionController, allEmissions }
+const emissionById = async (req, res ) => {
+  try {
+    const { id } = req.params;
+    const emission = await getEmissionsById(id);
+    if (!emission) {
+      return res.status(HTTP.STATUS.NOT_FOUND).json({ message: "No se encontró la emisión" });
+    }
+    
+    res.status(HTTP.STATUS.OK).json(emission);
+    
+  } catch (error) {
+    console.error("Error al obtener la emisión:", error);
+    res.status(HTTP.STATUS.INTERNAL_SERVER_ERROR).json({ message: "Error al obtener la emisión" });
+  }
+}
+
+module.exports = { calcularEmisionController, allEmissions, emissionById }

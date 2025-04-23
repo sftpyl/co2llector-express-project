@@ -1,12 +1,11 @@
 const express = require('express');
-const { calcularEmisionController } = require('./../controllers/emisionController');
-const { getAllEmissions, getEmissionsById } = require('../services/emissionsService');
+const { calcularEmisionController, allEmissions, emissionById } = require('./../controllers/emisionController');
 const router = express.Router();
 
 const PATH_EMISSIONS = '/emissions';
 
 router.post(`${PATH_EMISSIONS}/calculate`, calcularEmisionController)
-router.post(`${PATH_EMISSIONS}/history`, getAllEmissions)
-router.get(`${PATH_EMISSIONS}/:id`, getEmissionsById)
+router.post(`${PATH_EMISSIONS}/history`, allEmissions)
+router.get(`${PATH_EMISSIONS}/:id`, emissionById)
 
 module.exports = router
