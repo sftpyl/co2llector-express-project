@@ -1,6 +1,7 @@
 const { calcularEmision, filtrarActividadesValidas } = require('./../services/calcularEmision')
 const Emision = require('./../models/emisionModel')
 const HTTP = require("../utils/consts/httpConstants");
+const { getAllEmissions } = require('../services/emissionsService');
 
 const calcularEmisionController = async (req, res, next) => {
   try {
@@ -46,4 +47,22 @@ const calcularEmisionController = async (req, res, next) => {
   }
 }
 
-module.exports = { calcularEmisionController }
+const allEmissions = async (req, res) => {
+  try {
+    const userId = req.body.userId || req.user?.id;
+    if (!userId) {
+      return res.status(HTTP.STATUS.UNAUTHORIZED).json({ message: "Usuario no autorizado" });
+    }
+    const emissions = await getAllEmissions(userId);
+    if (!emissions) {
+      return res.status(HTTP.STATUS.NOT_FOUND).json({ message: "No se encontraron emisiones" });
+    }
+    // console.log("Emisiones obtenidas:", emissions);
+    res.status(HTTP.STATUS.OK).json(emissions);
+  } catch (err) {
+    console.error("Error al obtener las emisiones:", err);
+    res.status(HTTP.STATUS.INTERNAL_SERVER_ERROR).json({ message: "Error al obtener las emisiones" });
+  }
+}
+
+module.exports = { calcularEmisionController, allEmissions }
