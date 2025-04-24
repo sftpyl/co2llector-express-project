@@ -7,14 +7,14 @@ const errorHandler = (err, req, res, next) => {
 
   // Si el error es un error de validación o algo específico, puedes verificar el tipo
   if (err.name === 'ValidationError') {
-    return res.status(HTTP.STATUS.BAD_REQUEST).json({
+    return res.status(err.status || HTTP.STATUS.BAD_REQUEST).json({
       message: 'Datos inválidos',
       error: err.message
     });
   }
 
   // Si no es un error específico, devolvemos un error genérico
-  return res.status(HTTP.STATUS.INTERNAL_SERVER_ERROR).json({
+  return res.status(err.status || HTTP.STATUS.INTERNAL_SERVER_ERROR).json({
     message: 'Error interno del servidor',
     error: err.message
   });
