@@ -1,21 +1,41 @@
 const { generateResponse } = require("../services/openAiService");
+const HTTP = require("../utils/consts/httpConstants");
+const Recomendacion = require('./../models/recomendacionModel')
 
 const recommendations = async (req, res) => {
   try {
-    const { company, totalEmision, details } = req.body;
-
-    if (!company || !totalEmision || !details) {
-      return res.status(400).json({ error: "Faltan datos en la solicitud" });
+    const userId = req.user?.id
+    if (!userId) {
+      return res.status(401).json({ message: "Usuario no autenticado" });
     }
+    const user = await getUserById(userId)
 
-    // obtener la ultima consulta de la base de datos
+    const emissions = await getAllEmissions(userId); // Vienen ordenadas por año y mes, mas reciente primero
+    if ( emissions.length === 0) {
+      return res.status(400).json({ message: "No tiene registrada ninguna emisión para realizar un recomendación" });
+    }
+    const lastEmission = emissions[0]
 
+    const recomendacionAI = await generateResponse(user, lastEmission);
 
-    const response = await generateResponse(company, totalEmision, details);
-    return res.status(200).json({ message: response });
+    let recomendacion = await Recomendacion.findOne({ userId });
+
+      if (recomendacion) {
+        // Si la emisión ya existe, actualízala
+        recomendacion.recomendacion = recomendacionAI;
+        await recomendacion.save();
+        console.log('Recomendacion actualizada:', recomendacion);
+      } else {
+        // Si no existe, crea una nueva emisión
+        recomendacion = new Recomendacion({ userId, mes, recomendacion });
+        await recomendacion.save();
+        console.log('Recomendación creada:', recomendacion);
+      }
+
+    return res.status(HTTP.STATUS.OK).json({ recomendacion: recomendacionAI });
   } catch (error) {
     console.error("Error al generar la respuesta:", error);
-    return res.status(500).json({ error: "Error interno del servidor" });
+    throw new Error("Error al generar la respuesta:")
   }
 };
 

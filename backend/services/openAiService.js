@@ -2,12 +2,12 @@ const { OpenAI } = require("openai");
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
-const generateResponse = async (company, totalEmision, details) => {
+const generateResponse = async (user, lastEmission) => {
   const prompt = `
   Eres un asistente virtual que ayuda a las empresas a reducir su huella de carbono.
-  Has calculado la huella de carbono de la empresa ${company} y el total de emisiones es ${totalEmision} kgCO2e.
+  Has calculado la huella de carbono de la empresa ${user.nombre} y el total de emisiones es ${lastEmission.resultado.total} kgCO2e.
   Detalle de las emisiones:
-  ${JSON.stringify(details)}
+  ${JSON.stringify(lastEmission.resultado.detalle)}
   Genera un mensaje para la empresa con recomendaciones personalizadas para reducir su huella de carbono.
   Incluye consejos prácticos y sugerencias de acciones que pueden tomar para reducir su impacto ambiental.
   Asegúrate de que el mensaje sea claro y fácil de entender para el usuario.
@@ -36,12 +36,12 @@ const generateResponse = async (company, totalEmision, details) => {
   });
 
   // console.log("Response from OpenAI:", JSON.parse(response.choices[0].message.content));
-  const respuesta = JSON.parse(response.choices[0].message.content);
+  const recomendacion = JSON.parse(response.choices[0].message.content);
 
   // console.log("Response from OpenAI:", respuesta);
   
   // return response.choices[0].message.content;
-  return respuesta;
+  return recomendacion;
 };
 
 module.exports = {
