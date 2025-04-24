@@ -118,7 +118,7 @@ const swaggerDefinition = {
         {
           emisionData: {
             type: 'object',
-            required: ['actividades'],
+            required: ['actividades', 'anio', 'mes'],
             properties: {
               actividades: {
                 type: 'object',
