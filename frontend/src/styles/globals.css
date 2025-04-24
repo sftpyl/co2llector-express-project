@@ -1,0 +1,126 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@300;400;500;600;700&display=swap");
+
+@import "tailwindcss";
+
+@layer utilities {
+  .glass-ui {
+    --tw-backdrop-blur: var(--ui-glass-blur);
+    -webkit-backdrop-filter: var(--ui-glass-blur,) var(--ui-glass-brightness,) var(--ui-glass-contrast,) var(--ui-glass-grayscale,) var(--ui-glass-hue-rotate,) var(--ui-glass-invert,) var(--ui-glass-opacity,) var(--ui-glass-saturate,) var(--ui-glass-sepia,);
+    backdrop-filter: var(--ui-glass-blur,) var(--ui-glass-brightness,) var(--ui-glass-contrast,) var(--ui-glass-grayscale,) var(--ui-glass-hue-rotate,) var(--ui-glass-invert,) var(--ui-glass-opacity,) var(--ui-glass-saturate,) var(--ui-glass-sepia,);
+  }
+  .glass-ui-shadow {
+      --tw-backdrop-blur: var(--ui-glass-blur);
+      -webkit-backdrop-filter: var(--ui-glass-blur,) var(--ui-glass-brightness1,) var(--ui-glass-contrast,) var(--ui-glass-grayscale,) var(--ui-glass-hue-rotate,) var(--ui-glass-invert,) var(--ui-glass-opacity,) var(--ui-glass-saturate,) var(--ui-glass-sepia,);
+      backdrop-filter: var(--ui-glass-blur,) var(--ui-glass-brightness1,) var(--ui-glass-contrast,) var(--ui-glass-grayscale,) var(--ui-glass-hue-rotate,) var(--ui-glass-invert,) var(--ui-glass-opacity,) var(--ui-glass-saturate,) var(--ui-glass-sepia,);
+    
+  }
+  .container-padding {
+    @apply px-4 md:px-8 xl:px-36 2xl:px-[240px];
+  }
+  .text-gradient-green {
+    @apply bg-clip-text bg-gradient-to-b from-green-dark via-green-primary to-green-light;
+  }
+  .bg-gradient-green {
+    background-image: radial-gradient(ellipse at top left, var(--color-green-dark) 60%, var(--color-green-primary) 80%, var(--color-green-light) 100%);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    filter: contrast(1.2);
+    -webkit-filter: contrast(1.1);
+  }
+}
+
+
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+
+  --ui-glass-bg: rgba(0, 0, 0, 0.5);
+  --ui-glass-border: rgba(255, 255, 255, 0.18);
+  --ui-glass-blur: blur(20px);
+  --ui-glass-brightness: brightness(0.85);
+  --ui-glass-brightness1: brightness(0.55);
+  --ui-glass-contrast: contrast(1);
+  --ui-glass-opacity: opacity(0.9);
+  --ui-glass-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+}
+
+
+
+
+@font-face {
+  font-family: "BundaySans";
+  src: url("/frontend/public/fonts/BundaySans/BundaySans-ThinIt.otf")
+    format("opentype");
+  font-weight: 100;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "BundaySans";
+  src: url("/frontend/public/fonts/BundaySans/BundaySans-SemiLightUplt.otf")
+    format("opentype");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "BundaySans";
+  src: url("/frontend/public/fonts/BundaySans/BundaySans-Bold.otf")
+    format("opentype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* globals.css */
+html,
+body {
+  overflow-x: hidden;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  /* Fonts */
+  --font-bunday: "BundaySans", sans-serif;
+  --font-montserrat: "Montserrat", sans-serif;
+  --font-inter: "Inter", sans-serif;
+
+  /* Colors */
+  --color-green-primary: #4caf50;
+  --color-green-light: #a5d6a7;
+  --color-green-dark: #2e7d32;
+  --color-blue-primary: #1976d2;
+  --color-blue-gray: #90a4ae;
+  --color-blue-background: #e3f2fd;
+  --color-white: #ffffff;
+  --color-light-gray: #f5f5f5;
+  --color-dark-gray: #424242;
+  --color-carbon-gray: #212121;
+  --color-mint-accent: #c8e6c9;
+
+  --color-dark-shadow: rgba(0, 0, 0, 17%);
+
+  /*Breakpoints*/
+  --breakpoint-md768: 768px;
+  --breakpoint-xl1440: 1440px;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-montserrat);
+}
+
+
+.scrollbar-hide {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* IE y Edge */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
