@@ -2,7 +2,7 @@ const emisionModel = require("../models/emisionModel");
 
 const getAllEmissions = async (userId) => {
   try {
-    const emissions = await emisionModel.find({}).populate(userId).sort({ createdAt: -1 });
+    const emissions = await emisionModel.find({ userId }).sort({ createdAt: -1 });
 
     console.log("Emissions fetched successfully:", emissions);
     
