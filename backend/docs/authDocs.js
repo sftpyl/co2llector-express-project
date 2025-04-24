@@ -111,12 +111,15 @@
  */
 
 
+
+
+
 /**
  * @swagger
  * /api/emission/calculate:
  *   post:
  *     summary: Crear una nueva emisión
- *     tags: [Emisiones]
+ *     tags: [Emissions]
  *     description: Crea una nueva emisión y devuelve los resultados.
  *     security:
  *       - cookieAuth: []
@@ -125,42 +128,7 @@
  *       content:
  *         application/json:
  *           schema:
- *             type: object
- *             required:
- *               - userType
- *               - email
- *               - password
- *               - nombre
- *               - pais
- *               - rubro
- *             properties:
- *               userType:
- *                 type: string
- *                 enum: [company, individual]
- *                 example: company
- *                 description: Tipo de usuario (empresa o personal)
- *               email:
- *                 type: string
- *                 format: email
- *                 example: ricardo4@gmail.com
- *                 description: Correo electrónico del usuario
- *               password:
- *                 type: string
- *                 format: password
- *                 example: "1234"
- *                 description: Contraseña del usuario (mínimo 4 caracteres)
- *               nombre:
- *                 type: string
- *                 example: Ricardo
- *                 description: Nombre del usuario o empresa
- *               pais:
- *                 type: string
- *                 example: Argentina
- *                 description: País del usuario
- *               rubro:
- *                 type: string
- *                 example: Textil
- *                 description: Rubro de la empresa (solo aplica si userType es "company")
+ *             $ref: '#/components/schemas/CalcularEmision'
  *     responses:
  *       200:
  *         description: Éxito
@@ -170,4 +138,154 @@
  *               $ref: '#/components/schemas/EmisionResponse'
  *       400:
  *         description: Error de validación
+ */
+
+/**
+ * @swagger
+ * /api/emission/history:
+ *   get:
+ *     summary: Emisiones de un usuario
+ *     tags: [Emissions]
+ *     description: Devuelve una lista con las emisiones de un usuario
+ *     security:
+ *       - cookieAuth: []
+ *     responses:
+ *       200:
+ *         description: Éxito
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/EmisionResponse'
+ *       400:
+ *         description: Error de validación
+ */
+
+/**
+ * @swagger
+ * /api/emission/{id}:
+ *   get:
+ *     summary: Obtiene los datos de una emision
+ *     tags: [Emissions]
+ *     description: Obtiene los datos de una emision según su _id
+ *     security: 
+ *       - cookieAuth: []
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: ID de la emisión
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Éxito
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/EmisionResponse'
+ *       400:
+ *         description: Error de validación
+ *       404:
+ *         description: Emision no encontrada
+ */
+
+/**
+ * @swagger
+ * /api/recommendations:
+ *   post:
+ *     summary: Crea una recomendación
+ *     tags: [Recommendations]
+ *     description: Crea una nueva recomendación personalizada para un usuario según sus emisiones
+ *     security:
+ *       - cookieAuth: []
+ *     responses:
+ *       200:
+ *         description: Éxito
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Recommendation'
+ *       400:
+ *         description: Error de validación
+ */
+
+/**
+ * @swagger
+ * /api/profile/{id}:
+ *   get:
+ *     summary: Obtiene los datos de un usuario
+ *     tags: [Profile]
+ *     description: Obtiene los datos de un usuario
+ *     security:
+ *       - cookieAuth: []
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: ID del usuario
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Éxito
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/UserDetails'
+ *       400:
+ *         description: Error de validación
+ *       404:
+ *         description: Usuario no encontrado
+ *   put:
+ *     summary: Modifica los datos de un usuario
+ *     tags: [Profile]
+ *     description: Modifica los datos de un usuario
+ *     security:
+ *       - cookieAuth: []
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: ID del usuario
+ *         schema:
+ *           type: string
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/UserDetails'
+ *     responses:
+ *       200:
+ *         description: Éxito
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/UserDetails'
+ *       400:
+ *         description: Error de validación
+ *       404:
+ *         description: Usuario no encontrado
+ *   delete:
+ *     summary: Elimina un usuario
+ *     tags: [Profile]
+ *     description: Elimina un usuario
+ *     security:
+ *       - cookieAuth: []
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: ID del usuario
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Éxito
+ *       400:
+ *         description: Error de validación
+ *       404:
+ *         description: Usuario no encontrado
  */

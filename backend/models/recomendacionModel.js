@@ -3,14 +3,17 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const recomendacionSchema = new Schema({
-  calculoId: {
+  userId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Emision',
+    ref: 'User',
     required: true
   },
   prompt: String,
   recomendacion: String,
-  modelo: String, // IA utilizada
+  modelo: {
+    type: String,
+    default: 'OpenAI' // IA utilizada
+  }
 }, { timestamps: true } )
 
 module.exports = mongoose.model('Recomendacion', recomendacionSchema)

@@ -17,7 +17,8 @@ const getUserById = async (req, res) => {
         id: user._id,
         nombre: user.nombre,
         email: user.email,
-        // role: user.role,
+        rubro: user.rubro,
+        pais: user.pais,
         createdAt: user.createdAt,
         updatedAt: user.updatedAt
       }
@@ -48,7 +49,8 @@ const updateUser = async (req, res) => {
         id: user._id,
         nombre: user.nombre,
         email: user.email,
-        // role: user.role,
+        rubro: user.rubro,
+        pais: user.pais,
         createdAt: user.createdAt,
         updatedAt: user.updatedAt,
       }
@@ -70,9 +72,7 @@ const deleteUser = async (req, res) => {
         .json({ message: HTTP.MESSAGE_USER.USER_NOT_FOUND });
     }
 
-    res.status(HTTP.STATUS.OK).json({
-      message: HTTP.MESSAGE_USER.USER_DELETED,
-    });
+    res.status(HTTP.STATUS.OK).json();
   } catch (error) {
     console.error("Error al eliminar el usuario:", error);
     new Error("Error al eliminar el usuario:")

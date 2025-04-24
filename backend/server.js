@@ -22,6 +22,8 @@ app.use(express.json());
 
 // Routes
 const PATH_API = "/api";
+// Ruta para la documentación
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use(PATH_API, authRoutes);
 
 app.use(verifyAuthToken)
@@ -29,9 +31,6 @@ app.use(verifyAuthToken)
 app.use(PATH_API, recommendationsRoutes);
 app.use(PATH_API, emisionRoutes);
 app.use(PATH_API, isSelf, userRouter);
-
-// Ruta para la documentación
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // Agregar el middleware de manejo de errores después de las rutas
 app.use(errorHandler);

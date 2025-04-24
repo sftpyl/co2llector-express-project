@@ -77,6 +77,40 @@ const swaggerDefinition = {
           }
         }
       },
+      UserDetails: {
+        type: 'object',
+        required: [
+          'userType',
+          'email',
+          'nombre',
+          'pais',
+          'rubro'
+        ],
+        properties: {
+          email: {
+            type: 'string',
+            format: 'email',
+            example: 'ricardo@gmail.com'
+          },
+          userType: {
+            type: 'string',
+            enum: ['company', 'personal'],
+            example: 'company'
+          },
+          nombre: {
+            type: 'string',
+            example: 'Ricardo'
+          },
+          pais: {
+            type: 'string',
+            example: 'Argentina'
+          },
+          rubro: {
+            type: 'string',
+            example: 'Textil',
+          }
+        }
+      },
       CalcularEmision: {
         type: 'object',
         required: ['emisionData'],
@@ -98,9 +132,13 @@ const swaggerDefinition = {
                   residuos_kg: 2.0
                 }
               },
-              fecha: { 
-                type: 'string', 
-                format: 'date-time' 
+              anio: { 
+                type: 'number', 
+                example: 2025
+              },
+              mes: { 
+                type: 'number', 
+                example: 6
               }
             }
           },
@@ -114,7 +152,7 @@ const swaggerDefinition = {
         type: 'object',
         properties: {
           _id: { type: 'string' },
-          empresaId: { 
+          userId: { 
             type: 'string' 
           },
           actividades: { 
@@ -149,10 +187,25 @@ const swaggerDefinition = {
               }
             }
           },
-          fuente: { type: 'string' },
-          fecha: { type: 'string', format: 'date-time' },
+          anio: { 
+            type: 'number', 
+            example: 2025
+          },
+          mes: { 
+            type: 'number', 
+            example: 6
+          },
           createdAt: { type: 'string' },
           updatedAt: { type: 'string' }
+        }
+      },
+      Recommendation: {
+        type: 'object',
+        properties: {
+          recomendacion: {
+            type: 'string',
+            example: 'Recomendación generada por la AI'
+          }
         }
       }
     },
