@@ -49,24 +49,25 @@ const calcularEmisionController = async (req, res, next) => {
 
 const allEmissions = async (req, res) => {
   try {
-    const userId = req.body.userId || req.user?.id;
+    const userId = req.user?.id;
     if (!userId) {
       return res.status(HTTP.STATUS.UNAUTHORIZED).json({ message: "Usuario no autorizado" });
     }
     const emissions = await getAllEmissions(userId);
-    if (!emissions) {
-      return res.status(HTTP.STATUS.NOT_FOUND).json({ message: "No se encontraron emisiones" });
-    }
+    // if (!emissions) {
+    //   return res.status(HTTP.STATUS.NOT_FOUND).json({ message: "No se encontraron emisiones" });
+    // }
     // console.log("Emisiones obtenidas:", emissions);
     res.status(HTTP.STATUS.OK).json(emissions);
   } catch (err) {
     console.error("Error al obtener las emisiones:", err);
-    res.status(HTTP.STATUS.INTERNAL_SERVER_ERROR).json({ message: "Error al obtener las emisiones" });
+    throw new Error("Error al obtener las emisiones:");
   }
 }
 
 const emissionById = async (req, res ) => {
   try {
+    // chequear en la validación que el id sea un _id valid
     const { id } = req.params;
     const emission = await getEmissionsById(id);
     if (!emission) {
@@ -77,7 +78,7 @@ const emissionById = async (req, res ) => {
     
   } catch (error) {
     console.error("Error al obtener la emisión:", error);
-    res.status(HTTP.STATUS.INTERNAL_SERVER_ERROR).json({ message: "Error al obtener la emisión" });
+    throw new Error("Error al obtener las emisiones:");
   }
 }
 

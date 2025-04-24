@@ -7,10 +7,10 @@ const emisionSchema = new Schema({
     ref: 'User',
     required: true
   },
-  fecha: {
-    type: Date,
-    default: Date.now
-  },
+  // fecha: {
+  //   type: Date,
+  //   default: Date.now
+  // },
   actividades: {
     type: Map,
     of: Number,

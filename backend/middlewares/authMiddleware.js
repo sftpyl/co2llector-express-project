@@ -40,4 +40,15 @@ const verifyAuthToken = (req, res, next) => {
   }
 };
 
-module.exports = verifyAuthToken;
+const isSelf = (req, res, next) => {
+  const userIdFromToken = req.user.id;
+  const userIdFromParams = req.params.id;
+
+  if (userIdFromToken !== userIdFromParams) {
+    return res.status(HTTP.STATUS.FORBIDDEN).json({ message: 'No tienes permisos para esta acción' });
+  }
+
+  next();
+};
+
+module.exports = { verifyAuthToken, isSelf };

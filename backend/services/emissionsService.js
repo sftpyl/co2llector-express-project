@@ -2,7 +2,8 @@ const emisionModel = require("../models/emisionModel");
 
 const getAllEmissions = async (userId) => {
   try {
-    const emissions = await emisionModel.find({}).populate(userId).sort({ createdAt: -1 });
+    // Ordenar por períodos año y mes
+    const emissions = await emisionModel.find({ userId }).sort({ anio: -1, mes:-1 });
 
     console.log("Emissions fetched successfully:", emissions);
     
