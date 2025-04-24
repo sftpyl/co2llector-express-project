@@ -9,6 +9,17 @@ const STATUS = {
   INTERNAL_SERVER_ERROR: 500,
 };
 
+const STATUS_MESSAGES = {
+  OK: "OK",
+  CREATED: "Created",
+  BAD_REQUEST: "Bad Request",
+  UNAUTHORIZED: "Unauthorized",
+  FORBIDDEN: "Forbidden",
+  NOT_FOUND: "Not Found",
+  CONFLICT: "Conflict",
+  INTERNAL_SERVER_ERROR: "Internal Server Error",
+}
+
 const MESSAGE_LOGOUT = {
   LOGOUT_SUCCESSFUL: "Sesión cerrada exitosamente.",
   ERROR_IN_LOGOUT: "Error al cerrar sesión.",
@@ -39,10 +50,20 @@ const MESSAGE_TOKEN = {
   TOKEN_NOT_PROVIDED: "Token no proporcionado.",
 }
 
+const MESSAGE_USER = {
+  USER_NOT_FOUND: "Usuario no encontrado.",
+  USER_DELETED: "Usuario eliminado.",
+  USER_UPDATED: "Usuario actualizado.",
+  USER_FOUND: "Usuario encontrado.",
+  USER_NOT_UPDATED: "Usuario no actualizado.",
+}
+
 module.exports = {
   STATUS,
+  STATUS_MESSAGES,
   MESSAGE_LOGIN,
   MESSAGE_LOGOUT,
   MESSAGE_REGISTER,
   MESSAGE_TOKEN,
+  MESSAGE_USER,
 };
