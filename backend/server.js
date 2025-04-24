@@ -8,7 +8,7 @@ const authRoutes = require("./routes/authRoute");
 const recommendationsRoutes = require("./routes/recommendationsRouter");
 const ConnectionMongoDB = require("./connections/mongoose");
 const errorHandler = require("./middlewares/errorMiddleware");
-const verifyAuthToken = require("./middlewares/verifyAuthToken");
+const { verifyAuthToken, isSelf } = require("./middlewares/authMiddleware");
 const swaggerSpec = require("./docs/swagger");
 const swaggerUi = require("swagger-ui-express");
 const userRouter = require("./routes/userRouter");
@@ -22,11 +22,13 @@ app.use(express.json());
 
 // Routes
 const PATH_API = "/api";
-
 app.use(PATH_API, authRoutes);
-app.use(PATH_API, verifyAuthToken, recommendationsRoutes);
-app.use(PATH_API, verifyAuthToken, emisionRoutes);
-app.use(PATH_API, verifyAuthToken, userRouter);
+
+app.use(verifyAuthToken)
+
+app.use(PATH_API, recommendationsRoutes);
+app.use(PATH_API, emisionRoutes);
+app.use(PATH_API, isSelf, userRouter);
 
 // Ruta para la documentación
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
