@@ -31,7 +31,23 @@ const getEmissionsById = async (id) => {
   }
 }
 
+const getLastEmission = async (userId) => {
+  try {
+    const lastEmission = await emisionModel
+      .findOne({ userId })
+      .sort({ createdAt: -1 }); // El más reciente por fecha de creación real
+
+    console.log("Última emisión encontrada:", lastEmission);
+
+    return lastEmission;
+  } catch (error) {
+    console.error("Error fetching last emission:", error);
+    throw new Error("Error fetching last emission");
+  }
+};
+
 module.exports = {
   getAllEmissions,
   getEmissionsById,
+  getLastEmission,
 }

@@ -1,4 +1,4 @@
-const { getAllEmissions } = require("../services/emissionsService");
+const { getAllEmissions, getLastEmission } = require("../services/emissionsService");
 const { generateResponse } = require("../services/openAiService");
 const { getUserById } = require("../services/userService");
 const HTTP = require("../utils/consts/httpConstants");
@@ -19,15 +19,19 @@ const recommendations = async (req, res) => {
     const emissions = await getAllEmissions(userId); // Vienen ordenadas por año y mes, mas reciente primero
     if ( emissions.length === 0) {
       return res.status(400).json({ message: "No tiene registrada ninguna emisión para realizar un recomendación" });
-    }
-    const lastEmission = emissions[0]
+    } 
+    const lastEmission = await getLastEmission(userId);
+    // const lastEmission = emissions[0]
+    // La más reciente por fecha de creación real
+    // console.log("Ultima emision en recommendations", emisionFinal);
+    
 
     const recomendacionAI = await generateResponse(user, lastEmission);
 
     let recomendacion = await Recomendacion.findOne({ userId });
 
-    console.log("Recomendacion controller:", recomendacionAI);
-    console.log("find recomendacion controller:", recomendacion);
+    // console.log("Recomendacion controller:", recomendacionAI);
+    // console.log("find recomendacion controller:", recomendacion);
     
     
 
