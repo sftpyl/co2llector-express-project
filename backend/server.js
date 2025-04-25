@@ -26,7 +26,7 @@ const PATH_API = "/api";
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use(PATH_API, authRoutes);
 
-app.use(verifyAuthToken)
+// app.use(verifyAuthToken)
 
 app.use(PATH_API, recommendationsRoutes);
 app.use(PATH_API, emisionRoutes);

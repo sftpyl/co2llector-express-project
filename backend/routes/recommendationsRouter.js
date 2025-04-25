@@ -4,6 +4,6 @@ const router = express.Router();
 
 const PATH_RECOMMENDATIONS = '/recommendations';
 
-router.post(`${PATH_RECOMMENDATIONS}`, recommendations);
+router.get(`${PATH_RECOMMENDATIONS}/:id`, recommendations);
 
 module.exports = router;

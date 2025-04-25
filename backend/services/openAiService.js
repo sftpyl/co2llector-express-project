@@ -1,4 +1,5 @@
 const { OpenAI } = require("openai");
+const recomendacionModel = require("../models/recomendacionModel");
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
@@ -38,9 +39,17 @@ const generateResponse = async (user, lastEmission) => {
   // console.log("Response from OpenAI:", JSON.parse(response.choices[0].message.content));
   const recomendacion = JSON.parse(response.choices[0].message.content);
 
-  // console.log("Response from OpenAI:", respuesta);
+  console.log("Response from OpenAI:", recomendacion);
   
-  // return response.choices[0].message.content;
+  const responseMongo = await new recomendacionModel({
+    userId: user.id,
+    prompt: prompt,
+    recomendacion: recomendacion.recomendaciones,
+  }).save();
+
+  console.log("Recomendación guardada en la base de datos:", recomendacion);
+  console.log("Response from OpenAI Mongo:", responseMongo);
+  
   return recomendacion;
 };
 

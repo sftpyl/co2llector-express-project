@@ -9,7 +9,7 @@ const recomendacionSchema = new Schema({
     required: true
   },
   prompt: String,
-  recomendacion: String,
+  recomendacion: [String],
   modelo: {
     type: String,
     default: 'OpenAI' // IA utilizada

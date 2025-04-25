@@ -1,8 +1,13 @@
 const userModel = require("../models/userModel");
 
+
 const getUserById = async (userId) => {
   try {
     const user = await userModel.findById(userId);
+    //cuando no existe el usuario devuelve null
+    if (!user) {
+      return null;
+    }
     return user;
   } catch (error) {
     console.error("Error fetching user by ID:", error);

@@ -1,14 +1,20 @@
+const { getAllEmissions } = require("../services/emissionsService");
 const { generateResponse } = require("../services/openAiService");
+const { getUserById } = require("../services/userService");
 const HTTP = require("../utils/consts/httpConstants");
+const { userMock } = require("../utils/mock/userLogin");
 const Recomendacion = require('./../models/recomendacionModel')
 
 const recommendations = async (req, res) => {
   try {
-    const userId = req.user?.id
+    const userId = req.params.id //|| userMock.id; // Si no está loggeado, se usa el mock
     if (!userId) {
       return res.status(401).json({ message: "Usuario no autenticado" });
     }
+    // console.log("ID de usuario en recommendations", userId);
+    
     const user = await getUserById(userId)
+    // console.log("Usuario en recommendations",user);
 
     const emissions = await getAllEmissions(userId); // Vienen ordenadas por año y mes, mas reciente primero
     if ( emissions.length === 0) {
@@ -20,15 +26,20 @@ const recommendations = async (req, res) => {
 
     let recomendacion = await Recomendacion.findOne({ userId });
 
+    console.log("Recomendacion controller:", recomendacionAI);
+    console.log("find recomendacion controller:", recomendacion);
+    
+    
+
       if (recomendacion) {
         // Si la emisión ya existe, actualízala
         recomendacion.recomendacion = recomendacionAI;
-        await recomendacion.save();
+        // await recomendacion.save();
         console.log('Recomendacion actualizada:', recomendacion);
       } else {
         // Si no existe, crea una nueva emisión
         recomendacion = new Recomendacion({ userId, mes, recomendacion });
-        await recomendacion.save();
+        // await recomendacion.save();
         console.log('Recomendación creada:', recomendacion);
       }
 

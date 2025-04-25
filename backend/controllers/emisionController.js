@@ -1,11 +1,12 @@
 const { calcularEmision, filtrarActividadesValidas } = require('./../services/calcularEmision')
 const Emision = require('./../models/emisionModel')
 const HTTP = require("../utils/consts/httpConstants");
-const { getAllEmissions } = require('../services/emissionsService');
+const { getAllEmissions, getEmissionsById } = require('../services/emissionsService');
+const { userMock } = require('../utils/mock/userLogin');
 
 const calcularEmisionController = async (req, res, next) => {
   try {
-    const user = req.user;
+    const user = req.user || userMock; // Si no está loggeado, se usa el mock
 
     const { emisionData, save } = req.body;
 
@@ -30,7 +31,7 @@ const calcularEmisionController = async (req, res, next) => {
       total: resultado.total,
       detalle: resultado.detalle 
     } } );
-    
+  
     if (save === true) {
       console.log(user);
       
